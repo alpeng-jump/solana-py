@@ -524,12 +524,12 @@ class AsyncClient(_ClientCore):  # pylint: disable=too-many-public-methods
         return await self._provider.make_request(body, GetLargestAccountsResp)
 
     async def get_leader_schedule(
-        self, epoch: Optional[int] = None, commitment: Optional[Commitment] = None
+        self, slot: Optional[int] = None, commitment: Optional[Commitment] = None
     ) -> GetLeaderScheduleResp:
         """Returns the leader schedule for an epoch.
 
         Args:
-            epoch: Fetch the leader schedule for the epoch that corresponds to the provided slot.
+            slot: Fetch the leader schedule for the epoch that corresponds to the provided slot.
                 If unspecified, the leader schedule for the current epoch is fetched.
             commitment: Bank state to query. It can be either "finalized", "confirmed" or "processed".
 
@@ -541,7 +541,7 @@ class AsyncClient(_ClientCore):  # pylint: disable=too-many-public-methods
                 HMU77m6WSL9Xew9YvVCgz1hLuhzamz74eD9avi4XPdr,
             ), [346448, 346449, 346450, 346451, 369140, 369141, 369142, 369143, 384204, 384205, 384206, 384207])
         """
-        body = self._get_leader_schedule_body(epoch, commitment)
+        body = self._get_leader_schedule_body(slot, commitment)
         return await self._provider.make_request(body, GetLeaderScheduleResp)
 
     async def get_minimum_balance_for_rent_exemption(
